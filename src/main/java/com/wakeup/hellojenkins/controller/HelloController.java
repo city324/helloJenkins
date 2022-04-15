@@ -19,8 +19,22 @@ public class HelloController {
 //    @EventListener(classes={MyEvent.class})
     public String testListen() {
         ApplicationContext applicationContext = SpringUtil.getApplicationContext();
-        applicationContext.publishEvent(new MyEvent(applicationContext));
+        Object bean = applicationContext.getBean("com.Third");
+//        applicationContext.publishEvent(new MyEvent(applicationContext));
+//        Object third = applicationContext.getBean("third");
+        System.out.println(bean.toString());
         return "testListen========================";
+    }
+
+    @GetMapping("/timeout")
+//    @EventListener(classes={MyEvent.class})
+    public String timeout() {
+        try {
+            Thread.sleep(20 * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "timeout========================";
     }
 
 }

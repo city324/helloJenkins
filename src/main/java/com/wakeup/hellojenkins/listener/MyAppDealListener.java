@@ -1,13 +1,18 @@
 package com.wakeup.hellojenkins.listener;
 
 import ch.qos.logback.core.util.Loader;
+import com.wakeup.hellojenkins.inter.SpiInterface;
 import com.wakeup.hellojenkins.inter.TestSpi;
 import com.wakeup.hellojenkins.util.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -29,28 +34,48 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Component
+//@Component
 public class MyAppDealListener implements ApplicationListener<ApplicationStartedEvent> {
+
+/*
+    @Autowired
+    private SpiInterface spiInterface;
+*/
 
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
         System.out.println("ApplicationStartedEvent  发生了");
-        try {
-            TestSpi.getSpi();
+/*        try {
+            TestSpi.getSpiShwo();
+//            spiInterface.show("直接调用");
         } catch (Exception e) {
             e.printStackTrace();
-        }
-   /*     try {
+        }*/
+        try {
 
-            Class cla = getClassFromJavaFile("E:/temp/", "com.Third");
+            Class cla = getClassFromJavaFile("E:/temp/com/lib/", "Third");
+            ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) event.getApplicationContext();
+            // 获取bean工厂并转换为DefaultListableBeanFactory
+            DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) configurableApplicationContext.getBeanFactory();
+            // 通过BeanDefinitionBuilder创建bean定义
+            BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(cla);
+//        // 设置属性userService,此属性引用已经定义的bean:userService,这里userService已经被spring容器管理了.
+//        beanDefinitionBuilder.addPropertyReference("user", "user");
+            // 注册bean
+            defaultListableBeanFactory.registerBeanDefinition(cla.getName(), beanDefinitionBuilder.getRawBeanDefinition());
+            Object OBJ = defaultListableBeanFactory.getBean(cla);
             Method[] ms = cla.getMethods();
             for (Method m : ms) {
+                if ("m1".equals(m.getName()) || "m2".equals(m.getName())) {
+                    m.invoke(OBJ);
                     System.out.println(m);
+                }
             }
         } catch (Exception e) {
             System.out.println("报错  GG==");
             e.printStackTrace();
-        }*/
+        }
+
     }
 
     public static Class getClassFromJavaFile(String dirPath, String pakagePath) {

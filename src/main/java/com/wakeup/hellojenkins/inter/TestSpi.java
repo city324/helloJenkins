@@ -7,8 +7,13 @@ import java.util.ServiceLoader;
 @Component
 public class TestSpi {
 
-    public  static  void getSpi() {
-        ServiceLoader<SpiInterface> spi = ServiceLoader.load(SpiInterface.class);
+    public static ServiceLoader<SpiInterface> spi = null;
+
+    static {
+        spi = ServiceLoader.load(SpiInterface.class);
+    }
+
+    public static void getSpiShwo() {
         spi.forEach(s -> s.show("AAAAAAAAAAAAAAAA"));
     }
 }
