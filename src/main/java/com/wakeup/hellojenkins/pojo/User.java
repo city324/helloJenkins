@@ -2,14 +2,19 @@ package com.wakeup.hellojenkins.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
+@Data
 public class User {
     @TableId(type = IdType.AUTO)
     private Integer id;
+    @Value("ZS")
     private String name;
     private Integer age;
+    @Value("11111")
     private String email;
 
     public User(Integer id, String name, Integer age, String email) {

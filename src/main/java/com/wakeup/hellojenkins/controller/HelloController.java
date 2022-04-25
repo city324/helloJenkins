@@ -1,6 +1,7 @@
 package com.wakeup.hellojenkins.controller;
 
 import com.wakeup.hellojenkins.listener.MyEvent;
+import com.wakeup.hellojenkins.mapper.UserMapper;
 import com.wakeup.hellojenkins.util.SpringUtil;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,5 +37,11 @@ public class HelloController {
         }
         return "timeout========================";
     }
+
+/*    @GetMapping("/saveBatch")
+    public String saveBatch() {
+
+        return "timeout========================";
+    }*/
 
 }
