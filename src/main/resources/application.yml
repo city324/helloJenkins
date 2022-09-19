@@ -2,13 +2,39 @@ server:
   port: 8452
 
 # DataSource Config
+#spring:
+#  datasource:
+#    username: root
+#    password: root
+#    url: jdbc:mysql://192.168.223.66:3306/wk_wfj?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+#    #    type: com.alibaba.druid.pool.DruidDataSource
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  mvc:
+#    async:
+#      request-timeout: 3000
+#  redis:
+#    host: 192.168.223.66
+#    port: 6379
+
 spring:
   datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://192.168.223.66:3306/wk_wfj?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
-    #    type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  mvc:
-    async:
-      request-timeout: 3000
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        master:
+          url: jdbc:mysql://192.168.223.66:3306/wk_wfj?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        slaver:
+          url: jdbc:mysql://192.168.223.66:3306/wk_wfj2?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver
+    mvc:
+      async:
+        request-timeout: 3000
+  redis:
+    host: 192.168.223.66
+    port: 6379

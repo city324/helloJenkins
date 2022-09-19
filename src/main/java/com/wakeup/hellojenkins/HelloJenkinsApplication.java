@@ -39,10 +39,12 @@ public class HelloJenkinsApplication {
 //        Dog dog1 = (Dog) SpringUtil.getApplicationContext().getBean("dogFactory");
 //        System.out.println(dog1);
 //        System.out.println(dog1.getName());
-        Dog dog2 = (Dog) SpringUtil.getApplicationContext().getBean("dogFactory", new RedDog("rrrr"));
-        DogFactory dogFactory = (DogFactory) SpringUtil.getApplicationContext().getBean("&dogFactory", new RedDog("rrrr"));
-        System.out.println(dog2);
-        System.out.println(dogFactory.getObjectType());
+
+
+//        Dog dog2 = (Dog) SpringUtil.getApplicationContext().getBean("dogFactory", new RedDog("rrrr"));
+//        DogFactory dogFactory = (DogFactory) SpringUtil.getApplicationContext().getBean("&dogFactory", new RedDog("rrrr"));
+//        System.out.println(dog2);
+//        System.out.println(dogFactory.getObjectType());
     }
 
 }
