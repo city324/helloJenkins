@@ -1,5 +1,6 @@
 package com.wakeup.hellojenkins;
 
+import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.wakeup.hellojenkins.mapper.UserMapper;
 import com.wakeup.hellojenkins.pojo.User;
 import org.junit.jupiter.api.Test;
@@ -26,4 +27,12 @@ public class SaveTest {
         userMapper.insertBatchSomeColumn(users);
     }
 
+    @Test
+    public void testAdd() {
+        System.out.println(("----- selectAll method test ------"));
+        User user = new User(null, "qwerrrrr", 18, "qwerrrrr");
+        DynamicDataSourceContextHolder.push("pgsql");
+        userMapper.addUser(user);
+
+    }
 }

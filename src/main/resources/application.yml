@@ -32,9 +32,18 @@ spring:
           username: root
           password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
+        pgsql:
+          url: jdbc:postgresql://192.168.223.66:5432/postgres?currentSchema=public
+          username: postgres
+          password: root
+          driver-class-name: org.postgresql.Driver
     mvc:
       async:
         request-timeout: 3000
   redis:
     host: 192.168.223.66
     port: 6379
+# 整合mybatis
+mybatis:
+  #  typeAliasesPackage: com.neuedu.entity
+  mapper-locations: classpath*:mapper/*.xml

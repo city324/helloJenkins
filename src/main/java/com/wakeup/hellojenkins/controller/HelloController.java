@@ -41,4 +41,8 @@ public class HelloController {
         return "timeout========================";
     }*/
 
+    @GetMapping("/docker/hello")
+    public String helloDocker() {
+        return "hello docker Alon";
+    }
 }

@@ -10,4 +10,6 @@ public interface UserMapper extends BaseMapper<User> {
 
 //    @DS("slaver")
     Integer insertBatchSomeColumn(List<User> entityList);
+
+    void addUser(User user);
 }
