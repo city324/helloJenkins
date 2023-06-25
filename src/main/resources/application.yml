@@ -1,5 +1,12 @@
 server:
   port: 8452
+  tomcat:
+    connection-timeout: 5000
+  netty:
+    connection-timeout: 5000
+  servlet:
+    session:
+      timeout: 5000
 
 # DataSource Config
 #spring:

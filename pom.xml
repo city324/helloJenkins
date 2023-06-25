@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.wakeup</groupId>
     <artifactId>hello_jenkins</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>hello_jenkins</name>
     <description>hello_jenkins</description>
     <properties>
@@ -142,6 +142,11 @@
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.9</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -161,7 +166,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>
+<!--            <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.13</version>
@@ -170,7 +175,6 @@
                         <id>default</id>
                         <goals>
                             <goal>build</goal>
-                            <goal>push</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -181,12 +185,12 @@
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.6.0.1398</version>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 
